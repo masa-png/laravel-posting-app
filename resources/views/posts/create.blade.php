@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>投稿一覧</title>
+    <title>新規投稿</title>
 </head>
 
 <body>
@@ -26,25 +26,30 @@
     </header>
 
     <main>
-        <h1>投稿一覧</h1>
+        <h1>新規投稿</h1>
 
-        @if (session('flash_message'))
-            <p>{{ session('flash_message') }}</p>
+        @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         @endif
 
-        <a href="{{ route('posts.create') }}">新規投稿</a>
+        <a href="{{ route('posts.index') }}">&lt; 戻る</a>
 
-        @if ($posts->isNotEmpty())
-            @foreach ($posts as $post)
-                <article>
-                    <h2>{{ $post->title }}</h2>
-                    <p>{{ $post->content }}</p>
-                    <a href="{{ route('posts.show', $post) }}">詳細</a>
-                </article>
-            @endforeach
-        @else
-            <p>投稿はありません。</p>
-        @endif
+        <form action="{{ route('posts.store') }}" method="POST">
+            @csrf
+            <div>
+                <label for="title">タイトル</label>
+                <input type="text" name="title" id="title" value="{{ old('title') }}">
+            </div>
+            <div>
+                <label for="content">本文</label>
+                <textarea name="content" id="content">{{ old('content') }}</textarea>
+            </div>
+            <button type="submit">投稿</button>
+        </form>
     </main>
 
     <footer>
