@@ -22,8 +22,9 @@
                     <div class="card-body">
                         <h2 class="card-title fs-5">{{ $post->title }}</h2>
                         <p class="card-text">{{ $post->content }}</p>
+                        <span>{{ $post->updated_at }}</span>
 
-                        <div class="d-flex">
+                        <div class="d-flex mt-3">
                             <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-primary d-block me-1">詳細</a>
                             <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-primary d-block me-1">編集</a>
 

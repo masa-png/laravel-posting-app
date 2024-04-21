@@ -16,9 +16,10 @@
             <div class="card-body">
                 <h2 class="card-title fs-5">{{ $post->title }}</h2>
                 <p class="card-text">{{ $post->content }}</p>
+                <span>{{ $post->updated_at }}</span>
 
                 @if ($post->user_id === Auth::id())
-                    <div class="d-flex">
+                    <div class="d-flex mt-3">
                         <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-primary d-block me-1">編集</a>
 
                         <form action="{{ route('posts.destroy', $post) }}" method="POST"
