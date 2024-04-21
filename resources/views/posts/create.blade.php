@@ -9,6 +9,10 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,30 +33,37 @@
     </header>
 
     <main>
-        <h1>新規投稿</h1>
+        <div class="container">
+            <h1 class="fs-2 my-3">新規投稿</h1>
 
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <a href="{{ route('posts.index') }}">&lt; 戻る</a>
-
-        <form action="{{ route('posts.store') }}" method="POST">
-            @csrf
-            <div>
-                <label for="title">タイトル</label>
-                <input type="text" name="title" id="title" value="{{ old('title') }}">
+            <div class="mb-2">
+                <a href="{{ route('posts.index') }}" class="text-decoration-none">&lt; 戻る</a>
             </div>
-            <div>
-                <label for="content">本文</label>
-                <textarea name="content" id="content">{{ old('content') }}</textarea>
-            </div>
-            <button type="submit">投稿</button>
-        </form>
+
+            <form action="{{ route('posts.store') }}" method="POST">
+                @csrf
+                <div class="form-group mb-3">
+                    <label for="title">タイトル</label>
+                    <input type="text" class="form-control" name="title" id="title"
+                        value="{{ old('title') }}">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="content">本文</label>
+                    <textarea class="form-control" name="content" id="content">{{ old('content') }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">投稿</button>
+            </form>
+        </div>
     </main>
 
     <footer>
